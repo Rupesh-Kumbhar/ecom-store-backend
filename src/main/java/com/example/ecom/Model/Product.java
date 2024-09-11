@@ -20,6 +20,8 @@ public class Product {
 	private int product_quantity;
 	
 	private String product_imageName;
+	
+	private String product_desc;
 
 	public int getProduct_id() {
 		return product_id;
@@ -59,6 +61,14 @@ public class Product {
 
 	public void setProduct_imageName(String product_imageName) {
 		this.product_imageName = product_imageName;
+	}
+	
+	public String getProduct_desc() {
+		return product_desc;
+	}
+
+	public void setProduct_desc(String product_desc) {
+		this.product_desc = product_desc;
 	}
 
 }
