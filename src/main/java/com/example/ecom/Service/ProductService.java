@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.ecom.Exception.ResourceNotFoundException;
 import com.example.ecom.Model.Product;
 import com.example.ecom.Repository.ProductRepository;
 
@@ -26,16 +27,20 @@ public class ProductService {
 	}
 	
 	public Product viewProductById(int pid) {
-		Product findById =  productRepo.findById(pid);
+		Product findById =  productRepo.findById(pid).orElseThrow(()->new ResourceNotFoundException("Product with id = " + pid + " , Not found for Viewing"));
 		return findById;
 	}
 	
 	public void deleteProductById(int pid) {
-		productRepo.deleteById(pid);	
+	    if (!productRepo.existsById(pid)) {
+	        throw new ResourceNotFoundException("Product with id = " + pid + " , Not found for Deletion");
+	    }
+	    // If product exists,delete it
+	    productRepo.deleteById(pid);	
 	}
 	
 	public Product updateProductById(int pid, Product newProduct) {
-		Product oldProduct =  productRepo.findById(pid);
+		Product oldProduct =  productRepo.findById(pid).orElseThrow(()->new ResourceNotFoundException("Product with id = " + pid + " , Not found for Update"));
 		
 		oldProduct.setProduct_name(newProduct.getProduct_name());
 		oldProduct.setProduct_price(newProduct.getProduct_price());
