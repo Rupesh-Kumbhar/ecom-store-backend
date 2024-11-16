@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +49,7 @@ public class ProductController {
 	}
 	
 	//deleteProductById
-	@GetMapping("/delete/{productId}")
+	@DeleteMapping("/delete/{productId}")
 	public void deleteProductById(@PathVariable int productId) {
 //		System.out.println(productId); 
 		productService.deleteProductById(productId);
