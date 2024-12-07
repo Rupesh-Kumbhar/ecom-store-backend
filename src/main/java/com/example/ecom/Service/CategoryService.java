@@ -34,7 +34,7 @@ public class CategoryService {
 	}
 	
 	public CategoryDto updateCategory(CategoryDto newCat, int catId) {
-		Category oldCat = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("This Category Id not found") );
+		Category oldCat = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("This Category Id = " + catId +" not found") );
 //		oldCat.setCategoryId(newCat.getCategoryId());
 		oldCat.setCategoryName(newCat.getCategoryName());
 		Category save = this.catRepo.save(oldCat);
@@ -42,12 +42,12 @@ public class CategoryService {
 	} 
 	
 	public void deleteCategoryById(int catId){
-		Category cat = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("Category not found for deletion"));
+		Category cat = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("Category = "+ catId +"not found for deletion"));
 		this.catRepo.delete(cat);
 	}
 	
 	public CategoryDto viewCategoryById(int catId){
-		Category viewCatId = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("Category not found for Viewing"));
+		Category viewCatId = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("Category = "+ catId +" not found for Viewing"));
 		return this.mapper.map(viewCatId, CategoryDto.class);
 	}
 	

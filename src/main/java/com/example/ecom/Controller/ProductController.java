@@ -28,13 +28,13 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@PostMapping("/create")
+	@PostMapping("/create/{catId}")
 	@ResponseBody
-	public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+	public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, @PathVariable int catId) {
 //		System.out.println("Product controller");
 //		System.out.println(productService);
 		
-		ProductDto createProduct =  productService.createProduct(productDto);
+		ProductDto createProduct =  productService.createProduct(productDto,catId);
 		//System.out.println("Received DTO: " + productDto);	Just loggin for weather the productDto is getting used or not
 		return new ResponseEntity<ProductDto>(createProduct,HttpStatus.CREATED);
 
