@@ -77,4 +77,14 @@ public class ProductDto {
 		this.product_desc = product_desc;
 	}
 	
+	private CategoryDto categoryDto;
+
+	public CategoryDto getCategory() {
+		return categoryDto;
+	}
+
+	public void setCategory(CategoryDto categoryDto) {
+		this.categoryDto = categoryDto;
+	}
+	
 }
