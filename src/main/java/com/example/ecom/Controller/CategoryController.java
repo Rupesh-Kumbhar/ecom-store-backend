@@ -60,4 +60,11 @@ public class CategoryController {
 		return new ResponseEntity<List<CategoryDto>>(getAllCategoriesList,HttpStatus.OK);
 	}
 	
+	// Search by name
+    @GetMapping("/search/{name}")
+    public ResponseEntity<CategoryDto> searchCategoryByName(@PathVariable String name) {
+        CategoryDto categoryDto = this.catService.searchCategoryByName(name);
+        return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.OK);
+    }
+	
 }

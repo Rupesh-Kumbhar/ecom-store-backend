@@ -42,7 +42,7 @@ public class CategoryService {
 	} 
 	
 	public void deleteCategoryById(int catId){
-		Category cat = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("Category = "+ catId +"not found for deletion"));
+		Category cat = this.catRepo.findById(catId).orElseThrow(()-> new ResourceNotFoundException("Category = "+ catId +" not found for deletion"));
 		this.catRepo.delete(cat);
 	}
 	
@@ -56,4 +56,10 @@ public class CategoryService {
 		List<CategoryDto> catAllDto =  catAll.stream().map(cat ->this.mapper.map(cat, CategoryDto.class)).collect(Collectors.toList());
 		return catAllDto;
 	}
+	
+	public CategoryDto searchCategoryByName(String categoryName) {
+        Category category = catRepo.findByCategoryName(categoryName)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with name: " + categoryName));
+        return mapper.map(category, CategoryDto.class);
+    }
 }
